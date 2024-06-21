@@ -1,0 +1,27 @@
+data_structure = [
+  [1, 2, 3],
+  {'a': 4, 'b': 5},
+  (6, {'cube': 7, 'drum': 8}),
+  "Hello",
+  ((), [{(2, 'Urban', ('Urban2', 35))}])
+]
+def outer_function(data):
+    sum_ = 0
+    if isinstance(data, list) or isinstance(data, set) or isinstance(data, tuple):
+        for i in data:
+            sum_ += outer_function(i)  
+            
+    elif isinstance(data, str):
+        sum_ += len(data)
+        
+    elif isinstance(data, int):
+        sum_ += data
+
+    elif isinstance(data, dict):
+          for key, value in data.items():
+              sum_ += outer_function(key)
+              sum_ += outer_function(value)
+    return sum_
+
+a = outer_function(data_structure)
+print(a)
